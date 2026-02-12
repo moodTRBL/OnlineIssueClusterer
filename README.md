@@ -75,7 +75,7 @@ $$C_{new} = \frac{(C_{old} \times N) + V_{new}}{N + 1}$$
 
 참고 논문: https://aclanthology.org/2021.eacl-main.198.pdf
 
---
+---
 
 ## 실행 방법
 
@@ -110,9 +110,9 @@ uv pip install -r requirements.txt
 ```
 
 ### 4. 환경 변수 설정
-`.env`파일에서 데이터베이스 연결을 위해 환경변수를 넣어주세요.
+`.env`파일에서 데이터베이스 연결을 위해 환경변수를 넣어주세요. (postgresql을 기준으로 작성되었습니다)
 
-### 5. 서비스 싫행
+### 5. 서비스 실행
 ```bash
 python src/api.py
 ```
