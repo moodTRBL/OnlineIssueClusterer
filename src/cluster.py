@@ -7,8 +7,7 @@ import math
 from datetime import datetime, timezone
 from typing import Any
 
-from embedding_model import ClusterIssueEmbedding
-from model import MatchCandidate
+from model import ClusterIssueEmbedding, MatchCandidate
 from repository import ArticleRepository, IssueEmbeddingRepository, IssueRepository
 from embedding import Vectorizer
 

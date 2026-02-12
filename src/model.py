@@ -1,9 +1,19 @@
 from pydantic import BaseModel
 import datetime
 
+
 class Article(BaseModel):
     title: str
     content: str
+
+
+class GeneratedEmbedding(BaseModel):
+    dense: list[float]
+
+
+class ClusterIssueEmbedding(BaseModel):
+    issue_id: int
+    dense: list[float]
 
 
 class MatchCandidate(BaseModel):
@@ -11,6 +21,7 @@ class MatchCandidate(BaseModel):
     title: str
     score: float
     similarity: float
+
 
 class Source(BaseModel):
     url: str

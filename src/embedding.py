@@ -2,7 +2,7 @@ import logging
 
 from sentence_transformers import SentenceTransformer
 
-from embedding_model import GeneratedEmbedding
+from model import GeneratedEmbedding
 
         
 class Vectorizer:
