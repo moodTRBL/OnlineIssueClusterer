@@ -7,7 +7,7 @@ import math
 from datetime import datetime, timezone
 
 from .model import IssueEmbedding, MatchCandidate
-from .ports import ArticleRepository, EmbeddingManager, IssueEmbeddingRepository, IssueRepository
+from .repository import ArticleRepository, EmbeddingManager, IssueEmbeddingRepository, IssueRepository
 
 LAMBDA_CONST = 0.1
 ALPHA_CONST = 0.8
