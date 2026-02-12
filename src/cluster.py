@@ -9,6 +9,7 @@ from typing import Any
 
 from .model import IssueEmbedding, MatchCandidate
 from .repository import ArticleRepository, IssueEmbeddingRepository, IssueRepository
+from .embedding import Vectorizer
 
 LAMBDA_CONST = 0.1
 ALPHA_CONST = 0.8
@@ -23,7 +24,7 @@ class ClusterService:
 
     def __init__(
         self,
-        embedding_manager: Any,
+        embedding_manager: Vectorizer,
         issue_repo: IssueRepository,
         article_repo: ArticleRepository,
         issue_embedding_repo: IssueEmbeddingRepository,
@@ -46,7 +47,7 @@ class ClusterService:
         """단일 기사를 클러스터링한다."""
         embedding_res = self.embedding_manager.generate(ctx, title, content)
 
-        article_vector = list(embedding_res.embedding_feature.dense)
+        article_vector = list(embedding_res.dense)
         if not article_vector:
             raise ValueError("embedding vector is empty")
         _normalize(article_vector)
