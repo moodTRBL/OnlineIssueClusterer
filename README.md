@@ -26,14 +26,17 @@
 
 1.  **Semantic Similarity (Cosine Similarity)**
     벡터 간 코사인 유사도를 통해 문맥적 일치도를 계산합니다.
+
     $$Sim(A, C) = \frac{A \cdot C}{\|A\| \|C\|}$$
 
 2.  **Time Decay Weight (Time Awareness)**
     이슈의 최신성을 반영하기 위해, 마지막 업데이트 시점과의 차이($\Delta t$)에 따라 점수를 지수적으로 감쇠시킵니다. 이는 과거의 유사 사건이 아닌 현재 진행 중인 사건에 우선순위를 부여합니다.
+
     $$W_{time} = e^{-\lambda \times |\Delta t|}$$
 
 3.  **Final Score Calculation**
     유사도와 시간 가중치를 결합하여 최종 랭킹 점수를 산출합니다.
+
     $$Score = (\alpha \times Sim_{semantic}) + (\beta \times W_{time})$$
 
 ### 3. Dynamic Thresholding (동적 임계값)
@@ -50,10 +53,15 @@
 높은 점수를 받은 후보 클러스터라도, 병합 시 클러스터의 응집도를 해칠 수 있습니다. 이를 방지하기 위해 실루엣 계수(Silhouette Coefficient) 개념을 차용한 **분리도(Separability)** 검사를 수행합니다.
 
 - **Internal Distance ($a$):** 병합 대상 클러스터와의 거리
+
   $$a = 1.0 - Sim(A, C_{target})$$
+
 - **External Distance ($b$):** 두 번째로 가까운 이웃 클러스터와의 거리
+
   $$b = 1.0 - Sim(A, C_{neighbor})$$
+
 - **Separability Calculation:**
+
   $$Separability = \frac{b - a}{\max(a, b)}$$
 
 **Decision:** 최종적으로 `Score`가 높고 `Separability`가 양수인 경우에만 병합을 승인하며, 그렇지 않을 경우 **새로운 이슈(새로운 클러스터)**를 생성합니다.
@@ -62,4 +70,5 @@
 기사가 클러스터에 병합될 때마다, 클러스터의 대표 벡터를 이동 평균 방식으로 갱신하여 이슈의 성격 변화를 점진적으로 반영합니다.
 
 $$C_{new} = \frac{(C_{old} \times N) + V_{new}}{N + 1}$$
+
 *(N: Number of articles in the cluster)*
