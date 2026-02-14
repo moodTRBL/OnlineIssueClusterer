@@ -1,5 +1,6 @@
-from pydantic import BaseModel
 import datetime
+
+from pydantic import BaseModel
 
 
 class Article(BaseModel):
@@ -35,3 +36,28 @@ class CrawlItem(BaseModel):
     source: Source
     url: str
     published_at: datetime.datetime
+
+
+class ArticleRow(BaseModel):
+    id: int
+    title: str
+    content: str
+
+
+class IssueRow(BaseModel):
+    id: int
+    title: str
+    updated_at: datetime.datetime
+    article_count: int
+
+
+class IssueEmbeddingRow(BaseModel):
+    issue_id: int
+    dense: list[float]
+
+
+class PipelineResult(BaseModel):
+    scraped: int
+    saved: int
+    clustered: int
+    issues: list[IssueRow]

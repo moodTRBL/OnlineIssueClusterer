@@ -1,6 +1,5 @@
 from __future__ import annotations
 
-from dataclasses import dataclass
 import logging
 import os
 from pathlib import Path
@@ -11,22 +10,14 @@ import yaml
 from cluster import ClusterService
 from embedding import Vectorizer
 from feed import RssFetcher, get_feeds
+from model import PipelineResult
 from repository import (
-    IssueRow,
     PostgresArticleRepository,
     PostgresIssueEmbeddingRepository,
     PostgresIssueRepository,
     ensure_schema,
 )
 from scrap import NewsScraper
-
-
-@dataclass(slots=True)
-class PipelineResult:
-    scraped: int
-    saved: int
-    clustered: int
-    issues: list[IssueRow]
 
 
 class PipelineOrchestrator:

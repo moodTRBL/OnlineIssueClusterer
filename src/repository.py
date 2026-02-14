@@ -3,7 +3,6 @@
 from __future__ import annotations
 
 from contextlib import contextmanager
-from dataclasses import dataclass
 from datetime import datetime, timezone
 import hashlib
 import os
@@ -11,25 +10,7 @@ from pathlib import Path
 from typing import Any, Protocol
 
 
-@dataclass(slots=True)
-class ArticleRow:
-    id: int
-    title: str
-    content: str
-
-
-@dataclass(slots=True)
-class IssueRow:
-    id: int
-    title: str
-    updated_at: datetime
-    article_count: int
-
-
-@dataclass(slots=True)
-class IssueEmbeddingRow:
-    issue_id: int
-    dense: list[float]
+from model import ArticleRow, IssueEmbeddingRow, IssueRow
 
 
 def _load_dotenv_file(path: str = ".env") -> dict[str, str]:
